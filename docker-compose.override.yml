@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  azki:
+    container_name: azki
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:DefaultConnection=Server=host.docker.internal,1433;Database=AzkiDb;User Id=sa;Password=didar@123456"
+    depends_on:
+      - azkidb
+    ports:
+      - "8001:80"
