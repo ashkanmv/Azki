@@ -19,6 +19,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IInstrumentService, InstrumentService>();
 builder.Services.AddScoped<IInstrumentRepository, InstrumentRepository>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var context = builder.Services.BuildServiceProvider().GetRequiredService<AzkiContext>();
 await context.Database.MigrateAsync();
