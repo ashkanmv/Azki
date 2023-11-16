@@ -36,14 +36,14 @@ namespace azki.Service
             var discount = await GetDiscount(instrument.InsuranceType);
 
             return GetResultResponseDto.MapFromModel(instrument,
-                instrument.InstrumentColors.First(i => i.Id == dto.InstrumentColorId), discount);
+                instrument.InstrumentOptions.First(i => i.Id == dto.InstrumentColorId), discount);
         }
 
-        public async Task<List<InstrumentColor>> GetInstrumentColors(long instrumentId)
+        public async Task<List<InstrumentOption>> GetInstrumentColors(long instrumentId)
         {
             var instrument = await _repository.Get(instrumentId);
 
-            return instrument.InstrumentColors.ToList();
+            return instrument.InstrumentOptions.ToList();
         }
 
         private async Task<Discount> GetDiscount(InsuranceTypeEnum type)

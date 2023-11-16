@@ -6,13 +6,13 @@ namespace azki.Model
     {
         public Instrument()
         {
-            InstrumentColors = new HashSet<InstrumentColor>();
+            InstrumentOptions = new HashSet<InstrumentOption>();
         }
         public string FullTitle { get; set; }
         public string Description { get; set; }
         public string Result { get; set; }
         public string SvgUrl { get; set; }
         public InsuranceTypeEnum InsuranceType { get; set; }
-        public ICollection<InstrumentColor> InstrumentColors { get; set; }
+        public ICollection<InstrumentOption> InstrumentOptions { get; set; }
     }
 }

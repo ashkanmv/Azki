@@ -2,9 +2,9 @@
 
 namespace azki.Model
 {
-    public class InstrumentColor : BaseEntity
+    public class InstrumentOption : BaseEntity
     {
-        public InstrumentColor()
+        public InstrumentOption()
         {
             Instruments = new HashSet<Instrument>();
         }

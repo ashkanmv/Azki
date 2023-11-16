@@ -6,7 +6,7 @@ public class GetRandomResponseDto : BaseEntity
 {
     public string FullTitle { get; set; }
     public string Description { get; set; }
-    public IEnumerable<GetResultColor> Colors { get; set; }
+    public IEnumerable<GetResultColor> Options { get; set; }
 
     public static GetRandomResponseDto MapFromModel(Instrument instrument)
     {
@@ -16,14 +16,14 @@ public class GetRandomResponseDto : BaseEntity
             Description = instrument.Description,
             Title = instrument.Title,
             Id = instrument.Id,
-            Colors = instrument.InstrumentColors.Select(GetResultColor.MapFromModel)
+            Options = instrument.InstrumentOptions.Select(GetResultColor.MapFromModel)
         };
     }
 }
 
 public class GetResultColor : BaseEntity
 {
-    public static GetResultColor MapFromModel(InstrumentColor entity)
+    public static GetResultColor MapFromModel(InstrumentOption entity)
     {
         return new GetResultColor()
         {

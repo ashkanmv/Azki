@@ -2,6 +2,7 @@ using azki.Data;
 using azki.Persistence;
 using azki.Repositories;
 using azki.Service;
+using Azki.Service;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,21 +11,25 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext<AzkiContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+//builder.Services.AddDbContext<AzkiContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAny", b => b.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+});
 
 builder.Services.AddScoped<IInstrumentService, InstrumentService>();
 builder.Services.AddScoped<IInstrumentRepository, InstrumentRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
-var context = builder.Services.BuildServiceProvider().GetRequiredService<AzkiContext>();
-await context.Database.MigrateAsync();
-if (context.Instruments.Any() == false)
-    await DataSeed.SeedAsync(context);
+//var context = builder.Services.BuildServiceProvider().GetRequiredService<AzkiContext>();
+//await context.Database.MigrateAsync();
+//if (context.Instruments.Any() == false)
+//    await DataSeed.SeedAsync(context);
 
 var app = builder.Build();
 
@@ -34,6 +39,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("AllowAny");
 
 app.UseAuthorization();
 

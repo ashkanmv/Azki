@@ -8,6 +8,6 @@ namespace azki.Service
     {
         Task<GetResultResponseDto> GetResult(GetResultRequestDto dto);
         Task<IEnumerable<GetRandomResponseDto>> GetRandom();
-        Task<List<InstrumentColor>> GetInstrumentColors(long instrumentId);
+        Task<List<InstrumentOption>> GetInstrumentColors(long instrumentId);
     }
 }

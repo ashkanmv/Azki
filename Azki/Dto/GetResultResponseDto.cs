@@ -10,11 +10,11 @@ namespace Azki.Dto
         public string DiscountCode { get; set; }
         public string DiscountTitle { get; set; }
         public string SvgUrl { get; set; }
-        public static GetResultResponseDto MapFromModel(Instrument instrument, InstrumentColor color, Discount discount)
+        public static GetResultResponseDto MapFromModel(Instrument instrument, InstrumentOption option, Discount discount)
         {
             return new GetResultResponseDto()
             {
-                Body = instrument.Description + "/n" + color.Description,
+                Body = instrument.Description + "/n" + option.Description,
                 DiscountCode = discount.Code,
                 DiscountTitle = discount.Title,
                 FullTitle = instrument.FullTitle,

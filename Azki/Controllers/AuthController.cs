@@ -1,4 +1,4 @@
-﻿using azki.Dto;
+﻿using System.Text.Json;
 using Azki.Dto;
 using Azki.Service;
 using Microsoft.AspNetCore.Mvc;
@@ -29,8 +29,9 @@ namespace Azki.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine("Authenticate Exception : " + e.Message + " \n" + "Inner Exception : " + e.InnerException?.Message);
-                return BadRequest("خطای فنی");
+                Console.WriteLine("Authenticate Body : + " + JsonSerializer.Serialize(dto) + " \n Exception : " + e.Message + " \n" + "Inner Exception : " + e.InnerException?.Message);
+                //return BadRequest("خطای فنی");
+                return BadRequest("Authenticate Exception : " + e.Message + " \n" + "Inner Exception : " + e.InnerException?.Message);
             }
         }
 
@@ -49,8 +50,9 @@ namespace Azki.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine("Authenticate Exception : " + e.Message + " \n" + "Inner Exception : " + e.InnerException?.Message);
-                return BadRequest("خطای فنی");
+                Console.WriteLine("Authenticate Body "+ JsonSerializer.Serialize(dto) +" \n Exception : " + e.Message + " \n" + "Inner Exception : " + e.InnerException?.Message);
+                //return BadRequest("خطای فنی");
+                return BadRequest("Authenticate Exception : " + e.Message + " \n" + "Inner Exception : " + e.InnerException?.Message);
             }
         }
     }
