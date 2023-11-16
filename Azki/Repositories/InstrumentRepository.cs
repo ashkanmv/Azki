@@ -7,307 +7,600 @@ namespace azki.Repositories
 {
     public class InstrumentRepository : IInstrumentRepository
     {
-        protected readonly AzkiContext AzkiContext;
-        public InstrumentRepository(AzkiContext azkiContext)
+        //protected readonly AzkiContext AzkiContext;
+        //public InstrumentRepository(AzkiContext azkiContext)
+        //{
+        //    AzkiContext = azkiContext;
+        //}
+
+
+        public Instrument Get(long id)
         {
-            AzkiContext = azkiContext;
+            throw new Exception("ashdash");
+            //return await AzkiContext.Instruments.Include(x => x.InstrumentOptions).FirstAsync(x => x.Id == id);
+            return _instruments.First(x => x.Id == id);
         }
 
-
-        public async Task<Instrument> Get(long id)
+        public List<Instrument> GetAll()
         {
-            return await AzkiContext.Instruments.Include(x => x.InstrumentOptions).FirstAsync(x => x.Id == id);
+            //return await AzkiContext.Instruments.Include(x => x.InstrumentOptions).ToListAsync();
+            return _instruments;
         }
 
-        public async Task<List<Instrument>> GetAll()
-        {
-            return await AzkiContext.Instruments.Include(x => x.InstrumentOptions).ToListAsync();
-        }
-
-        public async Task<Discount?> GetDiscount(InsuranceTypeEnum type)
-        {
-            return await AzkiContext.Discounts.FirstOrDefaultAsync(d => d.InsuranceType == type && d.IsActive);
-        }
-
-        public async Task<int> UpdateDiscount(Discount discount)
-        {
-            AzkiContext.Discounts.Update(discount);
-            return await AzkiContext.SaveChangesAsync();
-        }
-
-
-        private List<Instrument> _instruments = new ()
+        private List<Instrument> _instruments = new()
         {
 
                 new Instrument
                 {
+                    Id = 1,
+                    Title = "کلاه کاسکت",
+                    Question = "آفرین درست حدس زدی!\r\nتو تو یه روز بارونی وقتی یه موتورسوار افتاد زمین تونستی جونش رو نجات بدی. حالا فکر می‌کنی اون موتورسوار کجاها سیر می‌کرده؟",
+                    Personality = "با مرام و پرطرفدار",
+                    FinalPersonality = "با مرام و پرطرفدار",
+                    Result = "الانم مثل کلاه کاسکت نجات‌‌دهنده‌ی آدما تو روزای سختی و همه دور و بری‌هات روت حساب ویژه‌ای می‌کنن.",
+                    SvgUrl = "https://s3.ir-thr-at1.arvanstorage.com/didar-0006df37-709c-4121-be9e-5210adc6a044/4b30c69e-c340-4403-83dc-42f8d7be20f2/helmet.svg",
                     InstrumentOptions = new List<InstrumentOption>()
                     {
                         new()
                         {
-                            Description = "توضیح رنگ 1",
-                            Title = "عنوان رنگ 1"
+                            Id = 1,
+                            Title = "لب دریا",
+                            Description = "تو یه آدم درونگرا و آروم هستی، ترجیح می‌دی در شرایطی باشی که خطر کمتری تو رو تهدید کنه و آرامش بیشتری داشته باشی.",
                         },
                         new()
                         {
-                            Description = "توضیح رنگ 2",
-                            Title = "عنوان رنگ 2"
+                            Id = 2,
+                            Title = "توی جنگل",
+                            Description = "آدم جسوری هستی، کنجکاوی و از جمله افرادی هستی که به طبیعت اهمیت می‌دن، جسارتت ستودنیه اما باید مراقب باشی برات دردسر نشه.",
                         },
                         new()
                         {
-                            Description = "توضیح رنگ 3",
-                            Title = "عنوان رنگ 3"
+                            Id = 3,
+                            Title = "مسابقه موتورسواری",
+                            Description = "این فوق‌العاده‌ست که به فکر پیشرفت خودتی و داری برای برنده شدن تلاش می‌کنی. می‌دونی که مسیر پیروزی مسیر پر زحمتیه، باید مراقب باشی در این مسیر آسیب نبینی.",
                         }
                     },
-                    Title = "عنوان 1",
-                    Description = "توضیح 1",
-                    FullTitle = "عنوان کامل 1",
-                    Result = "نتیجه 1",
-                    InsuranceType = InsuranceTypeEnum.Crash,
-                    SvgUrl = "https://s31.picofile.com/file/8469200592/4.jpg"
+                    Discount = new Discount()
+                    {
+                        Id = 1,
+                        Title = "بیمه حوادث",
+                        Discription = "اگه تو هم یه حامی نیاز داری برای حوادث ناگوار زندگی …",
+                        Code = "",
+                    }
                 },
                 new Instrument
                 {
+                    Id = 2,
+                    Title = "بالش",
+                    Personality = "امن و آرامش‌بخش",
+                    FinalPersonality = "امن و آرامش‌بخش",
+                    Question = "آره درسته! بالش بودی و بخاطر آرامشی که به آدما هدیه دادی تبدیل به انسان شدی. حالا فکر می‌کنی چه رنگی بودی؟",
+                    Result = "بالش امن‌ترین تکیه‌گاهِ سر آدمیزاده. درست مثل تو که با آرامشت همه‌ی اطرافیانتو مجذوب خودت می‌کنی.",
+                    SvgUrl = "https://s3.ir-thr-at1.arvanstorage.com/didar-0006df37-709c-4121-be9e-5210adc6a044/4b30c69e-c340-4403-83dc-42f8d7be20f2/Pillow.svg",
                     InstrumentOptions = new List<InstrumentOption>()
                     {
                         new()
                         {
-                            Description = "توضیح رنگ 4",
-                            Title = "عنوان رنگ 4"
+                            Id = 4,
+                            Title = "بالش زرد",
+                            Description = "زرد نشونه‌ی نشاط و شادابیه! اینکه همیشه خنده رو لباته سرچشمه از زندگی قبلیت داره. این ویژگی شخصیتی‌ات رو همیشه ایمن نگه دار.",
                         },
                         new()
                         {
-                            Description = "توضیح رنگ 5",
-                            Title = "عنوان رنگ 5"
+                            Id = 5,
+                            Title = "بالش بنفش",
+                            Description = "بنفش نشات‌گرفته از افکار و اندیشه های انسانیه، همیشه بخشی از این افکار مرتبط با ادامه زندگی و کسب آرامش هستند.",
                         },
                         new()
                         {
-                            Description = "توضیح رنگ 6",
-                            Title = "عنوان رنگ 6"
+                            Id = 6,
+                            Title = "بالش ساده",
+                            Description = "سفید معانی بسیار زیادی داره؛ اما چیزی که اینجا برجسته است نور و روشناییه! مشخصه که ذهنیت شفافی نسبت به مسائل زندگیت داری و کنترل کارها برات راحته.",
                         }
                     },
-                    Title = "عنوان 2",
-                    Description = "توضیح 2",
-                    FullTitle = "عنوان کامل 2",
-                    Result = "نتیجه 2",
-                    InsuranceType = InsuranceTypeEnum.Full,
-                    SvgUrl = "https://s31.picofile.com/file/8469200576/m.jpg"
+                    Discount = new Discount()
+                    {
+                        Id = 2,
+                        Title = "بیمه عمر",
+                        Discription = "اگه می‌خوای بیمه عمرت بالشِ آرامشت باشه… ",
+                        Code = ""
+                    }
                 },
                 new Instrument
                 {
+                    Id = 3,
+                    Title = "کلید",
+                    Personality = "محافظه‌کار و مشکل‌گشا",
+                    FinalPersonality = "کاربلد و حلال مسائل",
+                    Question = ": از اشتیاقی که به باز کردن قفل‌های باز نشدنی داری باید حدس می‌زدم که کلید بودی. فکر می‌کنی چه قفلی رو باز کردی که انقدر راهگشا بوده که تبدیل به انسان شدی؟",
+                    Result = "اینکه چالش‌های زندگی رو تو یه چشم‌بهم‌زدن حل می‌کنی یادگاری دورانیه که کلید بودی!",
+                    SvgUrl = "https://s3.ir-thr-at1.arvanstorage.com/didar-0006df37-709c-4121-be9e-5210adc6a044/4b30c69e-c340-4403-83dc-42f8d7be20f2/key.svg",
                     InstrumentOptions = new List<InstrumentOption>()
                     {
                         new()
                         {
-                            Description = "توضیح رنگ 7",
-                            Title = "عنوان رنگ 7"
+                            Id = 7,
+                            Title = "قفل یه زیر خاکی",
+                            Description = "اصولاً زیرخاکی‌ها به دور از شهر و طی سفرها جاشون رو پیدا می‌کردن، شاید بخاطر همینه که این همه به سفرهای مختلف علاقه‌مندی.",
                         },
                         new()
                         {
-                            Description = "توضیح رنگ 8",
-                            Title = "عنوان رنگ 8"
+                            Id = 8,
+                            Title = "قفل یه صندوقچه اجدادی",
+                            Description = "عشق و علاقت به خانواده ستودنیه و این درست مثل صندوقچه اجدادی که بازش کردی تو خانواده‌تون ارثیه. برای همینه که بهترین خاطرات زندگیت از مسافرت‌های خانوادگیه.",
                         },
                         new()
                         {
-                            Description = "توضیح رنگ 9",
-                            Title = "عنوان رنگ 9"
+                            Id = 9,
+                            Title = "قفل کلبه‌ی وسط جنگل",
+                            Description = "زمانی که کلید بودی، صاحبت مسیر خیلی طولانی و خطرناکی رو به دل جنگل رفته بوده و تو رو همیشه با خودش همه‌جا می‌برده… پس بخاطر همینه که تو هم علاقه‌مند سفر هستی!",
                         }
                     },
-                    Title = "عنوان 3",
-                    Description = "توضیح 3",
-                    FullTitle = "عنوان کامل 3",
-                    Result = "نتیجه 3",
-                    InsuranceType = InsuranceTypeEnum.Home,
-                    SvgUrl = "https://s31.picofile.com/file/8469200626/3.jpg"
+                    Discount = new Discount()
+                    {
+                        Id = 3,
+                        Title = "بیمه مسافرتی",
+                        Discription = "اگه دنبال یه سفر امن و بی‌خطری … ",
+                        Code = ""
+                    }
                 },
                 new Instrument
                 {
-                    InstrumentOptions = new List<InstrumentOption>()
-                    {
-                        new()
-                        {
-                            Description = "توضیح رنگ 10",
-                            Title = "عنوان رنگ 10"
-                        },
-                        new()
-                        {
-                            Description = "توضیح رنگ 11",
-                            Title = "عنوان رنگ 11"
-                        },
-                        new()
-                        {
-                            Description = "توضیح رنگ 12",
-                            Title = "عنوان رنگ 12"
-                        }
-                    },
-                    Title = "عنوان 4",
-                    Description = "توضیح 4",
-                    FullTitle = "عنوان کامل 4",
-                    Result = "نتیجه 4",
+                    Id = 4,
+                    Title = "پازل",
+                    Personality = "مکمل و همراه",
+                    FinalPersonality = "کامل‌کننده و یاور",
+                    Question = "پس پازل بودی، چه باحال! واسه همینه که همیشه می‌تونی گل سر سبد جمع باشی، به نظرت چه پازلی بودی؟",
+                    Result = "هنوز مثل گذشته می‌تونی هر مساله‌ای رو حل کنی و مرکز هر جمع و بحثی باشی.",
                     InsuranceType = InsuranceTypeEnum.Mobile,
-                    SvgUrl = "https://s31.picofile.com/file/8469200642/2.jpg"
-                },
-                new Instrument
-                {
+                    SvgUrl = "https://s3.ir-thr-at1.arvanstorage.com/didar-0006df37-709c-4121-be9e-5210adc6a044/4b30c69e-c340-4403-83dc-42f8d7be20f2/puzzle.svg",
                     InstrumentOptions = new List<InstrumentOption>()
                     {
                         new()
                         {
-                            Description = "توضیح رنگ 13",
-                            Title = "عنوان رنگ 13"
+                            Id = 10,
+                            Title = "پازل هری پاتر",
+                            Description = "مثل هری پاتر آدم کنجکاو و پر رمز و رازی هستی. سعی می‌کنی به بقیه کمک کنی و سختی‌ها رو براشون آسون می‌کنی.",
                         },
                         new()
                         {
-                            Description = "توضیح رنگ 14",
-                            Title = "عنوان رنگ 14"
+                            Id = 11,
+                            Title = "پازل طرح شرک",
+                            Description = "راز فعال بودن کودک درونت فاش شد! بخاطر پازلی که بودی. اما هنوز مثل شِرِک به امنیت  خودت، دوستات و خانواده‌ت توجه زیادی داری.",
                         },
                         new()
                         {
-                            Description = "توضیح رنگ 15",
-                            Title = "عنوان رنگ 15"
+                            Id = 12,
+                            Title = "پازل منظره 2000 قطعه",
+                            Description = "به منظره زندگیت توجه ویژه‌ای می‌کنی و در این منظره‌ی پُر از تصویر همیشه حواست به خودت و عزیزانت هست.",
                         }
                     },
-                    Title = "عنوان 5",
-                    Description = "توضیح 5",
-                    FullTitle = "عنوان کامل 5",
-                    Result = "نتیجه 5",
-                    InsuranceType = InsuranceTypeEnum.RightHand,
-                    SvgUrl = "https://s31.picofile.com/file/8469200650/1.jpg"
+                    Discount = new Discount()
+                    {
+                        Id = 4,
+                        Title = "بیمه تکمیلی",
+                        Code = "",
+                        Discription = "اگر می‌خوای مثل همیشه برای خودت یا دیگران گام مثبت برداری، بیمه تکمیلی‌ات رو..."
+                    }
                 },
                 new Instrument
                 {
+                    Id = 5,
+                    Title = "حلقه نجات/تیوپ نجات",
+                    Personality = "احیاگر و حواس جمع",
+                    FinalPersonality = "احیاگر و حواس جمع",
+                    Question = "عجب، که اینطور! پس حلقه نجات/تیوپ نجات بودی که انقدر بقیه روی کمکت حساب باز می‌کنن، به نظرت بیشتر کجاها بودی؟",
+                    Result = "تصمیماتی که می‌گیری پشتش کلی ایده و فکر اصولی هست، برای همینه که اکثر اوقات تصمیمات حیاتی رو به تو می‌سپرن.",
+                    SvgUrl = "https://s3.ir-thr-at1.arvanstorage.com/didar-0006df37-709c-4121-be9e-5210adc6a044/4b30c69e-c340-4403-83dc-42f8d7be20f2/Tube.svg",
                     InstrumentOptions = new List<InstrumentOption>()
                     {
                         new()
                         {
-                            Description = "توضیح رنگ 16",
-                            Title = "عنوان رنگ 16"
+                            Id = 13,
+                            Title = "استخر رو باز",
+                            Description = "برای تو فرقی نداره که در محیط کوچک یا بزرگ باشی، تلاش‌ت رو می‌کنی تا با حواس جمع جلوی حوادث رو بگیری.",
                         },
                         new()
                         {
-                            Description = "توضیح رنگ 17",
-                            Title = "عنوان رنگ 17"
+                            Id = 14,
+                            Title = "کشتی تایتانیک",
+                            Description = "توی رخ دادن مشکلات بزرگ روی کمک تو حساب باز می‌کنن، شاید نتونی تمام اون مشکل رو حل بکنی اما حداقل می‌تونی دلگرمی بدی.",
                         },
                         new()
                         {
-                            Description = "توضیح رنگ 18",
-                            Title = "عنوان رنگ 18"
+                            Id = 15,
+                            Title = "یک فستیوال بین‌المللی",
+                            Description = "بیش از حد مهربونی و حالِ خوب بقیه برات توی اولویت هست. اکثر اوقات تصمیمات‌ت حول محور دیگران می‌چرخه تا مطمئن باشی بهشون آسیبی وارد نمی‌شه.",
                         }
                     },
-                    Title = "عنوان 6",
-                    Description = "توضیح 6",
-                    FullTitle = "عنوان کامل 6",
-                    Result = "نتیجه 6",
+                    Discount = new Discount()
+                    {
+                        Id = 5,
+                        Title = "بیمه شخص ثالث موتور",
+                        Code = "",
+                        Discription = "توی این زندگی‌ت هم حلقه‌ی نجات باش و نگرانی‌هات رو ..."
+                    }
+                },
+                new Instrument
+                {
+                    Id = 6,
+                    Title = "چتر",
+                    Personality = "رمانتیک و مهربون",
+                    FinalPersonality = "رمانتیک و مهربون",
+                    Question = "پس دلیل این همه مهربونی و مراقبتت از آدما چتر بودنت تو زندگی قبلیه! فکر می‌کنی اگه چتر بودی چه رنگی بودی؟",
+                    Result = "همین الانم مثل چتر حامی دوستات تو شرایط سختی و تو رگبار مشکلات به دادشون می‌رسی!",
                     InsuranceType = InsuranceTypeEnum.ThirdPerson,
-                    SvgUrl = "https://s31.picofile.com/file/8469200668/sh.jpg"
-                },
-                new Instrument
-                {
+                    SvgUrl = "https://s3.ir-thr-at1.arvanstorage.com/didar-0006df37-709c-4121-be9e-5210adc6a044/4b30c69e-c340-4403-83dc-42f8d7be20f2/umbrella.svg",
                     InstrumentOptions = new List<InstrumentOption>()
                     {
                         new()
                         {
-                            Description = "توضیح رنگ 19",
-                            Title = "عنوان رنگ 19"
+                            Id = 16,
+                            Title = "آبی روشن",
+                            Description = "آبی نشونه صاف و ساده بودن با دوستان و اطرافیانته که نشون میده خیلی هواشونو داری! روشن بودن این رنگ نشونه‌ی لطافت تو رو داره.",
                         },
                         new()
                         {
-                            Description = "توضیح رنگ 20",
-                            Title = "عنوان رنگ 20"
+                            Id = 17,
+                            Title = "سبز یشمی",
+                            Description = "عاشق چند چیزی؛ آرامش، طبیعت، تعادل و پیشرفت. اینا خصوصیات رنگ سبزه و تیره بودن این رنگ نشون‌دهنده‌ی جدیت تو در این خصوصیات هست.",
                         },
                         new()
                         {
-                            Description = "توضیح رنگ 21",
-                            Title = "عنوان رنگ 21"
+                            Id = 18,
+                            Title = "هاله‌ای از قرمز",
+                            Description = "انگار خیلی تیز و چابکی! قرمز نشونه هیجانات زندگیه. با اینکه هوای انرژیتو داره اما گاهی لازمه حواستو بیشتر جمع کنی.",
                         }
                     },
-                    Title = "عنوان 7",
-                    Description = "توضیح 7",
-                    FullTitle = "عنوان کامل 7",
-                    Result = "نتیجه 7",
-                    InsuranceType = InsuranceTypeEnum.Mobile,
-                    SvgUrl = "https://s31.picofile.com/file/8469200650/1.jpg"
+                    Discount = new Discount()
+                    {
+                        Id = 6,
+                        Title = "بیمه درمان تکمیلی",
+                        Code = "",
+                        Discription = " اگه برای هزینه‌های درمانت یه چتر حامی مثل خودت می‌خوای…"
+                    }
                 },
                 new Instrument
                 {
+                    Id = 7,
+                    Title = "ماشین مسابقه",
+                    Personality = "سریع و حرفه‌ای",
+                    FinalPersonality = "سریع و حرفه‌ای",
+                    Question = "تو زندگی قبلیت یه ماشین مسابقه بودی که عاشق سرعت بودی و همیشه تلاش می‌کردی برنده بشی، به نظرت توی چه مسابقاتی بودی؟",
+                    Result = "چون ماشین مسابقه بودی، توی این زندگیت هم خیلی سریع و حرفه‌ای هستی!",
+                    SvgUrl = "https://s3.ir-thr-at1.arvanstorage.com/didar-0006df37-709c-4121-be9e-5210adc6a044/4b30c69e-c340-4403-83dc-42f8d7be20f2/Race%20Car.svg",
                     InstrumentOptions = new List<InstrumentOption>()
                     {
                         new()
                         {
-                            Description = "توضیح رنگ 22",
-                            Title = "عنوان رنگ 22"
+                            Id = 19,
+                            Title = "مسابقات رالی",
+                            Description = "درست مثل ماشین‌های مسابقات رالی، سریع و تیز هستی، اما باید مراقب پیچ‌های خطرناک زندگی‌ت باشی.",
                         },
                         new()
                         {
-                            Description = "توضیح رنگ 23",
-                            Title = "عنوان رنگ 23"
+                            Id = 20,
+                            Title = "مسابقات شبیه‌سازی",
+                            Description = "مسابقات شبیه‌سازی مقرون‌به‌صرفه و آسون هست، واسه همینه که همیشه به دنبال راه و روش‌های منطقی ولی آسون برای حل مشکلاتت می‌گردی.",
                         },
                         new()
                         {
-                            Description = "توضیح رنگ 24",
-                            Title = "عنوان رنگ 24"
+                            Id = 21,
+                            Title = "مسابقات چرخ‌باز",
+                            Description = "اگر الآن آدم زرنگ و موفقی هستی بخاطر اینه که تو زندگی قبلیت نهایت سرعت رو در پهن‌ترین پیست‌ها می‌رفتی.",
                         }
                     },
-                    Title = "عنوان 8",
-                    Description = "توضیح 8",
-                    FullTitle = "عنوان کامل 8",
-                    Result = "نتیجه 8",
-                    InsuranceType = InsuranceTypeEnum.Full,
-                    SvgUrl = "https://s31.picofile.com/file/8469200592/4.jpg"
+                    Discount = new Discount()
+                    {
+                        Id = 7,
+                        Title = "بیمه بدنه",
+                        Code = "",
+                        Discription = "اگر می‌خوای ضرر حادثه رو کم کنی…"
+                    }
                 },
                 new Instrument
                 {
+                    Id = 8,
+                    Title = "عصا",
+                    Personality = "حامی و پشتیبان",
+                    FinalPersonality = "حامی و پشتیبان",
+                    Question = "مطمئناً عصا بودی، یه نگاه به خودت بکن! همیشه از همه حمایت می‌کنی. فکر می‌کنی چه عصایی بودی؟",
+                    Result = "عصای کی بودی؟ واقعاً از این‌که پهلوونی‌ات رو با پشتیبانیت ثابت کردی لذت بردم.",
+                    SvgUrl = "https://s3.ir-thr-at1.arvanstorage.com/didar-0006df37-709c-4121-be9e-5210adc6a044/4b30c69e-c340-4403-83dc-42f8d7be20f2/cane.svg",
                     InstrumentOptions = new List<InstrumentOption>()
                     {
                         new()
                         {
-                            Description = "توضیح رنگ 25",
-                            Title = "عنوان رنگ 25"
+                            Id = 22,
+                            Title = "عصای چوبی",
+                            Description = "چوب از اصالت میاد؛ پس معلومه آدم با اصالتی هستی و اخلاقیات و انسانیت برات اهمیت بسیار زیادی داره.",
                         },
                         new()
                         {
-                            Description = "توضیح رنگ 26",
-                            Title = "عنوان رنگ 26"
+                            Id = 23,
+                            Title = "عصای جادویی",
+                            Description = "بحث جادو که میاد وسط همیشه پای رویا هم در میونه؛ کمی درگیر رویاهات هستی که این می‌تونه جذاب باشه و زندگی رو از یک‌نواختی خارج کنه، اما حواست به اصل زندگی‌ت هم باشه.",
                         },
                         new()
                         {
-                            Description = "توضیح رنگ 27",
-                            Title = "عنوان رنگ 27"
+                            Id = 24,
+                            Title = "عصای فلزی",
+                            Description = "فلز، استواری تو رو نشون میده. خیلی خوبه که حواست به بقیه هست، اما خودت رو در اولویت بذار رفیق.",
                         }
                     },
-                    Title = "عنوان 9",
-                    Description = "توضیح 9",
-                    FullTitle = "عنوان کامل 9",
-                    Result = "نتیجه 9",
-                    InsuranceType = InsuranceTypeEnum.ThirdPerson,
-                    SvgUrl = "https://s31.picofile.com/file/8469200626/3.jpg"
+                    Discount = new Discount()
+                    {
+                        Id = 8,
+                        Title = "بیمه عمر",
+                        Code = "",
+                        Discription = "اگه می‌خوای بیمه عمرت عصای پیریت باشه…"
+                    }
                 },
                 new Instrument
                 {
+                    Id = 9,
+                    Title = "سپر",
+                    Personality = "آدمِ روزای سخت",
+                    FinalPersonality = "حامی و پشتیبان",
+                    Question = "هممم چه باحال! تو زندگی قبلیت یه سپر بودی که خیلی سفت و سخت بودی، به نظرت تو کدوم جنگ بودی؟",
+                    Result = "واقعاً از این‌که پهلوونیت رو با پشتیبانیت ثابت کردی لذت بردم.",
+                    SvgUrl = "https://s3.ir-thr-at1.arvanstorage.com/didar-0006df37-709c-4121-be9e-5210adc6a044/4b30c69e-c340-4403-83dc-42f8d7be20f2/shield.svg",
                     InstrumentOptions = new List<InstrumentOption>()
                     {
                         new()
                         {
-                            Description = "توضیح رنگ 28",
-                            Title = "عنوان رنگ 28"
+                            Id = 25,
+                            Title = "سپر هخامنشیان",
+                            Description = "قدرت و توانایی بالایی داری و آدمی هستی که می‌خوای جلوی رخدادهای منفی رو بگیری. پس منطقیه دلیر باشی و برای مقابله با حوادث گام برداری.",
                         },
                         new()
                         {
-                            Description = "توضیح رنگ 29",
-                            Title = "عنوان رنگ 29"
+                            Id = 26,
+                            Title = "سپر اشکانیان",
+                            Description = "آدمی هستی که نگهداری از اشیا و حتی افراد برات اهمیت زیادی داره و این خصلت رو از اشکانیان به ارث بردی. پس باید مثل همون‌ها هم مراقب حوادث مقابلت باشی.",
                         },
                         new()
                         {
-                            Description = "توضیح رنگ 30",
-                            Title = "عنوان رنگ 30"
+                            Id = 27,
+                            Title = "سپر ساسانیان",
+                            Description = "آدم با سلیقه و آینده‌نگری هستی، درست مثل حکومت ساسانیان. اون‌ها هم مثل تو همیشه به فکر آینده بودن و با تصمیمات‌شون ایمنی آینده رو تا حدی تضمین می‌کردن.",
                         }
                     },
-                    Title = "عنوان 10",
-                    Description = "توضیح 10",
-                    FullTitle = "عنوان کامل 10",
-                    Result = "نتیجه 10",
-                    InsuranceType = InsuranceTypeEnum.Crash,
-                    SvgUrl = "https://s31.picofile.com/file/8469200592/4.jpg"
+                    Discount = new Discount()
+                    {
+                        Id = 9,
+                        Title = "بیمه حوادث",
+                        Code = "",
+                        Discription = "اگه می‌خوای بیمه حوادث سپر جونت باشه…"
+                    }
+                },
+                new Instrument
+                {
+                    Id = 10,
+                    Title = "دماسنج",
+                    Personality = "دقیق و حساس",
+                    FinalPersonality = "دقیق و حساس",
+                    Question = "از اون نازک نارنجی‌های روزگاری و حساس بودنت بخاطر همینه که تو زندگی قبلی دماسنج بودی. فکر می‌کنی چه دماسنجی بودی؟",
+                    Result = "همه‌ی کارات دقیق و رو حساب کتابه و بیخیالی بقیه عصبانیت می‌کنه! این دقت و آینده‌نگری گاهی زیادی حساست می‌کنه و باعث میشه دلخور بشی.",
+                    SvgUrl = "https://s3.ir-thr-at1.arvanstorage.com/didar-0006df37-709c-4121-be9e-5210adc6a044/4b30c69e-c340-4403-83dc-42f8d7be20f2/thermomet.svg",
+                    InstrumentOptions = new List<InstrumentOption>()
+                    {
+                        new()
+                        {
+                            Id = 28,
+                            Title = "دماسنج طبی",
+                            Description = "هر مشکلی رو به دقیق‌ترین شکل ممکن شناسایی می‌کنی و برای حل اون بهترین راهکارها رو ارائه می‌دی، اینجا هم ما بهترین راهکار ممکن رو بهت ارائه دادیم.",
+                        },
+                        new()
+                        {
+                            Id = 29,
+                            Title = "دماسنج جیوه‌ای",
+                            Description = "شاید خیلی دقیق نباشی اما حواست هست که دور و برت چه خبره و چه اتفاقاتی داره میفته و همین باعث می‌شه تا حد زیادی از پس مشکلات بر بیای.",
+                        },
+                        new()
+                        {
+                            Id = 30,
+                            Title = "دماسنج دیجیتال",
+                            Description = "تقریباً می‌شه گفت که هیچکس نمی‌تونه دورت بزنه، هم باهوشی و هم برای انجام کارهات مدرن‌ترین روش‌ها رو درنظر می‌گیری، خطر تو رو خیلی کم تهدید می‌کنه.",
+                        }
+                    },
+                    Discount = new Discount()
+                    {
+                        Id = 10,
+                        Title = "بیمه آتش‌سوزی",
+                        Code = "",
+                        Discription = "اگر می‌خوای خیالت از دمای خونه‌ت و جبران حوادث از آتش سوزی راحت باشه …"
+                    }
+                },
+                new Instrument
+                {
+                    Id = 11,
+                    Title = "کپسول آتش نشانی",
+                    Personality = "برای مواقع خطر!",
+                    FinalPersonality = "کارا و مفید",
+                    Question = "چه جالب که کپسول آتش نشانی بودی! به نظر میاد خیلی از خطرات رو دفع کردی و همه ازت سپاسگزارن! به نظرت چه نوع کپسولی بودی؟",
+                    Result = "این‌که بقیه برای دفع خطر بهت نیاز داشتن به نظر جالبه!",
+                    SvgUrl = "https://s3.ir-thr-at1.arvanstorage.com/didar-0006df37-709c-4121-be9e-5210adc6a044/4b30c69e-c340-4403-83dc-42f8d7be20f2/fire.svg",
+                    InstrumentOptions = new List<InstrumentOption>()
+                    {
+                        new()
+                        {
+                            Id = 31,
+                            Title = "کپسول پودری",
+                            Description = "به نظر میاد آدمی هستی که هر طور شده می‌خوای خطرات رو از خودت و بقیه دور کنی، همینه که باعث شده انقدر تو دل اطرافیانت عزیز بشی.",
+                        },
+                        new()
+                        {
+                            Id = 32,
+                            Title = "کپسول گازی",
+                            Description = "بیشتر تمرکزت اینه که به سریع‌ترین روش ممکن مشکلات رو حل کنی. آفرین! این باعث شده به یک فرد جذاب تبدیل بشی و همه می‌خوان تو رو داشته باشن.",
+                        },
+                        new()
+                        {
+                            Id = 33,
+                            Title = "کپسول آبی",
+                            Description = "کپسول آبی! درسته، بلدی چطوری به روش اصولی در شرایط اضطراری مسائل رو مدیریت کنی و خطرات رو دور کنی، خوبیِ دیگه‌ت اینه که روش‌هات رو به بقیه هم یاد می‌دی.",
+                        }
+                    },
+                    Discount = new Discount()
+                    {
+                        Id = 11,
+                        Title = "بیمه مسافرتی",
+                        Code = "",
+                        Discription = "آتیش‌ها رو خاموش کن! نگران بیمه آتش سوزی نباش و…"
+                    }
+                },
+                new Instrument
+                {
+                    Id = 12,
+                    Title = "چمدان",
+                    Personality = "پایه و همراه",
+                    FinalPersonality = "پایه و همراه",
+                    Question = "آفرین، خوب تونستی حدس بزنی چی بودی! تو یه چمدون بودی که همیشه تو سفر بودی، حالا به نظرت کجاها بیشتر می‌گشتی؟",
+                    Result = "هر کی هر برنامه‌ای داشته باشه پایه‌ای و هیچ وقت چه تو روزای خوب و چه تو روزای بد هیچ کسی رو نا‌امید نمی‌کنی.",
+                    SvgUrl = "https://s3.ir-thr-at1.arvanstorage.com/didar-0006df37-709c-4121-be9e-5210adc6a044/4b30c69e-c340-4403-83dc-42f8d7be20f2/baggage.svg",
+                    InstrumentOptions = new List<InstrumentOption>()
+                    {
+                        new()
+                        {
+                            Id = 34,
+                            Title = "مناطق گرم استوایی",
+                            Description = "خونگرمی و صمیمیت‌ات با آدما یه ویژگی جا مونده از سفرای استواییه و تعداد دوستات غیر قابل شمارشن.",
+                        },
+                        new()
+                        {
+                            Id = 35,
+                            Title = "زمستان‌های لندن",
+                            Description = "شهر پر تردد و پر خاطره‌ای بودی، بخاطر همینه دایره دوستات زیادن و برونگرا هستی، اما بعضی وقتا هم مثل لندن دلگیر و ناراحت می‌شی…",
+                        },
+                        new()
+                        {
+                            Id = 36,
+                            Title = "اهرام مصر",
+                            Description = "عاشق چیزای تاریخی و اصیلی و این ویژگیت باعث شده به رفاقت‌های الکی هم رو نیاری. از سفر رفتن با آدم‌های اصیل لذت می‌بری.",
+                        }
+                    },
+                    Discount = new Discount()
+                    {
+                        Id = 12,
+                        Title = "بیمه مسافرتی",
+                        Code = "",
+                        Discription = "مثل زندگی قبلیت هوس سفر کردی…"
+                    }
+                },
+                new Instrument
+                {
+                    Id = 13,
+                    Title = "قطب نما",
+                    Personality = "لیدر و ماجراجو",
+                    FinalPersonality = "رهبر و ماجراجو",
+                    Question = "آره درسته دلیل این همه ماجراجویی قطب‌نما بودن تو زندگی قبلیه.به نظرت بیشتر کجاها سیر می کردی؟",
+                    Result = "علاقه‌ات به سفر و گردش برای همین قطب‌نما بودنت تو زندگی قبلیه.",
+                    SvgUrl = "https://s3.ir-thr-at1.arvanstorage.com/didar-0006df37-709c-4121-be9e-5210adc6a044/4b30c69e-c340-4403-83dc-42f8d7be20f2/compass.svg",
+                    InstrumentOptions = new List<InstrumentOption>()
+                    {
+                        new()
+                        {
+                            Id = 37,
+                            Title = "شاخ آفریقا",
+                            Description = "آفریقا بیشتر از 2000 قومیت و نژاد داره، واسه همینه که از ملاقات با افراد جدید لذت می‌بری، عاشق سفر به جاهایی هستی که طبیعت‌های بکر دارند.",
+                        },
+                        new()
+                        {
+                            Id = 38,
+                            Title = "سفرهای دریایی",
+                            Description = "سفر تو اقیانوس بدون برنامه نمیشه! تو آدمی هستی که برای سفرهات دقیق برنامه‌ریزی می‌کنی و به تفریح کردن اهمیت می‌دی.",
+                        },
+                        new()
+                        {
+                            Id = 39,
+                            Title = "جاده‌های بیابانی",
+                            Description = "سفر وسط صحرا و بیابون کار هر کسی نیست. دلیل صبر و حوصله‌ی زیادت تمرینای زیاد تو زندگی قبلیه.\r\nاگر مثل زندگی قبلیت هوس سفر کردی…",
+                        }
+                    },
+                    Discount = new Discount()
+                    {
+                        Id = 13,
+                        Title = "بیمه مسافرتی",
+                        Code = "",
+                        Discription = "اگر مثل زندگی قبلیت هوس سفر کردی… "
+                    }
+                },
+                new Instrument
+                {
+                    Id = 14,
+                    Title = "آسانسور",
+                    Personality = "ایمن و سریع",
+                    FinalPersonality = "ایمن و سریع",
+                    Question = "حالا فهمیدم چرا راحت بودن بقیه برات مهمه! چون آسانسور بودی. بگو ببینم کیا رو حمل می‌کردی؟",
+                    Result = "علاقت نسبت به کمک کردن به دیگران همینه که تو آسانسور مهمی بودی.",
+                    SvgUrl = "",
+                    InstrumentOptions = new List<InstrumentOption>()
+                    {
+                        new()
+                        {
+                            Id = 40,
+                            Title = "یه بازیگر هالیوودی",
+                            Description = "تو یه آدم باشخصیت هستی که به اطرافیانت احترام می‌ذاری و حالِ خوب اون‌ها، حالِ تورو هم خوب می‌کنه.",
+                        },
+                        new()
+                        {
+                            Id = 41,
+                            Title = "یه بیزینس‌من",
+                            Description = "یک فرد باهوش و کار بلدی! چون کمک رو از افراد دریغ نمی‌کنی و بهترین روش رو به اون‌ها ارائه می‌دی.",
+                        },
+                        new()
+                        {
+                            Id = 42,
+                            Title = "یه جهانگرد",
+                            Description = "نه تنها خیلی به بقیه توجه می‌کنی، بلکه با روی گشاده از مهمون‌هات هم استقبال می‌کنی و براشون گام‌هایی در راستای خوشحالی‌شون برمی‌داری.",
+                        }
+                    },
+                    Discount = new Discount()
+                    {
+                        Id = 14,
+                        Title = "بیمه آسانسور",
+                        Code = "",
+                        Discription = "اگه فکر می‌کنی آسانسور جایی که داخلش هستی نیاز به بیمه داره..."
+                    }
+                },
+                new Instrument
+                {
+                    Id = 15,
+                    Title = "گارد ریل",
+                    Personality = "مقاوم و مشتی",
+                    FinalPersonality = "استوار و محکم",
+                    Question = "پس این همه استوار بودنت از این میاد که گارد ریل بودی! هممم، می‌دونم که تو زندگی قبلیت جونِ یه موتور سوار رو نجات دادی، به نظرت اون کی بوده؟",
+                    Result = "خوش به حال اطرافیانت که فردی استوار مثل تو توی زندگی‌شون حضور پیدا کرده!",
+                    SvgUrl = "",
+                    InstrumentOptions = new List<InstrumentOption>()
+                    {
+                        new()
+                        {
+                            Id = 43,
+                            Title = "یه پیک موتوری",
+                            Description = "آدمی هستی که همه جوره حواست به اطرافیانت هست تا در روزهای سخت و طاقت فرسا دچار مشکلات حاد نشن.",
+                        },
+                        new()
+                        {
+                            Id = 44,
+                            Title = "یه موتورسوار عادی",
+                            Description = "تو یه آدم دلسوز اما محکم هستی، از کسایی که سر به هوا هستن به خوبی محافظت می‌کنی و باعث پیشرفت‌شون می‌شی.",
+                        },
+                        new()
+                        {
+                            Id = 45,
+                            Title = "یه جوونِ یاغی",
+                            Description = "مشخصاً بالغ و عاقلی و می‌دونی که کِی و کجا باید ظاهر بشی تا نقشی موثر داشته باشی.",
+                        }
+                    },
+                    Discount = new Discount()
+                    {
+                        Id = 15,
+                        Title = "بیمه شخص ثالث موتور",
+                        Code = "",
+                        Discription = "اگر می‌خوای جلوی خسارت رو بگیری، نگران نباش…"
+                    }
                 },
             };
     }

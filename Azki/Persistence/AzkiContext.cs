@@ -13,8 +13,8 @@ namespace azki.Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Instrument>().HasMany(i => i.InstrumentOptions).WithMany(i => i.Instruments);
-            modelBuilder.Entity<Instrument>().Property(i => i.FullTitle).HasMaxLength(200);
-            modelBuilder.Entity<Instrument>().Property(i => i.Description).HasMaxLength(1000);
+            modelBuilder.Entity<Instrument>().Property(i => i.FinalPersonality).HasMaxLength(200);
+            //modelBuilder.Entity<Instrument>().Property(i => i.Description).HasMaxLength(1000);
             modelBuilder.Entity<Instrument>().Property(i => i.Result).HasMaxLength(1000);
             modelBuilder.Entity<Instrument>().Property(i => i.Title).HasMaxLength(200);
             modelBuilder.Entity<Instrument>().Property(i => i.SvgUrl).HasMaxLength(200);

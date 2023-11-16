@@ -1,6 +1,7 @@
 using azki.Data;
 using azki.Persistence;
 using azki.Repositories;
+using Azki.Repositories;
 using azki.Service;
 using Azki.Service;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<IInstrumentService, InstrumentService>();
 builder.Services.AddScoped<IInstrumentRepository, InstrumentRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<LogRepository>();
 
 //var context = builder.Services.BuildServiceProvider().GetRequiredService<AzkiContext>();
 //await context.Database.MigrateAsync();

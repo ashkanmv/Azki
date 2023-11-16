@@ -17,7 +17,7 @@ namespace azki.Service
         }
         public async Task<IEnumerable<GetRandomResponseDto>> GetRandom()
         {
-            var instruments = await _repository.GetAll();
+            var instruments = _repository.GetAll();
             var randomNumber = new Random();
             var numbers = new List<int>();
             while (numbers.Count < OptionCounts)
@@ -31,33 +31,17 @@ namespace azki.Service
 
         public async Task<GetResultResponseDto> GetResult(GetResultRequestDto dto)
         {
-            var instrument = await _repository.Get(dto.InstrumentId);
-
-            var discount = await GetDiscount(instrument.InsuranceType);
+            var instrument = _repository.Get(dto.InstrumentId);
 
             return GetResultResponseDto.MapFromModel(instrument,
-                instrument.InstrumentOptions.First(i => i.Id == dto.InstrumentColorId), discount);
+                instrument.InstrumentOptions.First(i => i.Id == dto.InstrumentOptionId));
         }
 
         public async Task<List<InstrumentOption>> GetInstrumentColors(long instrumentId)
         {
-            var instrument = await _repository.Get(instrumentId);
+            var instrument = _repository.Get(instrumentId);
 
             return instrument.InstrumentOptions.ToList();
-        }
-
-        private async Task<Discount> GetDiscount(InsuranceTypeEnum type)
-        {
-            var discount = await _repository.GetDiscount(type);
-            if(discount == null) return new Discount();
-
-
-            discount.IsActive = false;
-
-            await _repository.UpdateDiscount(discount);
-
-            return discount;
-
         }
     }
 

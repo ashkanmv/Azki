@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using Azki.Dto;
+using Azki.Repositories;
 using Azki.Service;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,9 +11,11 @@ namespace Azki.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
-        public AuthController(IAuthService authService)
+        private readonly LogRepository _log;
+        public AuthController(IAuthService authService, LogRepository log)
         {
             _authService = authService;
+            _log = log;
         }
 
         [HttpPost]
@@ -29,7 +32,8 @@ namespace Azki.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine("Authenticate Body : + " + JsonSerializer.Serialize(dto) + " \n Exception : " + e.Message + " \n" + "Inner Exception : " + e.InnerException?.Message);
+                await _log.AddLog("Authenticate Body : + " + JsonSerializer.Serialize(dto) + " \n Exception : " +
+                                  e.Message + " \n" + "Inner Exception : " + e.InnerException?.Message);
                 //return BadRequest("خطای فنی");
                 return BadRequest("Authenticate Exception : " + e.Message + " \n" + "Inner Exception : " + e.InnerException?.Message);
             }
@@ -50,7 +54,8 @@ namespace Azki.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine("Authenticate Body "+ JsonSerializer.Serialize(dto) +" \n Exception : " + e.Message + " \n" + "Inner Exception : " + e.InnerException?.Message);
+                await _log.AddLog("Authenticate Body " + JsonSerializer.Serialize(dto) + " \n Exception : " +
+                                  e.Message + " \n" + "Inner Exception : " + e.InnerException?.Message);
                 //return BadRequest("خطای فنی");
                 return BadRequest("Authenticate Exception : " + e.Message + " \n" + "Inner Exception : " + e.InnerException?.Message);
             }

@@ -1,0 +1,4 @@
+
+UTC Occurrence Date => 11/16/2023 20:18:59 Error Message => GetResult Body : + {"InstrumentId":1,"InstrumentOptionId":1} 
+ Exception : ashdash 
+Inner Exception : 

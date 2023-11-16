@@ -6,16 +6,16 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["azki/azki.csproj", "azki/"]
-RUN dotnet restore "azki/azki.csproj"
+COPY ["Azki/Azki.csproj", "Azki/"]
+RUN dotnet restore "Azki/Azki.csproj"
 COPY . .
-WORKDIR "/src/azki"
-RUN dotnet build "azki.csproj" -c Release -o /app/build
+WORKDIR "/src/Azki"
+RUN dotnet build "Azki.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "azki.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Azki.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "azki.dll"]
+ENTRYPOINT ["dotnet", "Azki.dll"]

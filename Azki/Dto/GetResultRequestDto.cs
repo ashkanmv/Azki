@@ -5,7 +5,7 @@ namespace azki.Dto
     public class GetResultRequestDto
     {
         public long InstrumentId { get; set; }
-        public long InstrumentColorId { get; set; }
+        public long InstrumentOptionId { get; set; }
 
     }
 }

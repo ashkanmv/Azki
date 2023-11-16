@@ -1,16 +1,6 @@
 version: '3.4'
 
 services:
-  azkidb: 
-    container_name: azkidb
-    image: mcr.microsoft.com/mssql/server:2017-latest
-    environment:
-        MSSQL_SA_PASSWORD: 'didar@123456'
-        ACCEPT_EULA: 'Y'
-    restart: always
-    ports: 
-        - '1533:1433'
-
   azki:
     image: ${DOCKER_REGISTRY-}azki
     build:
