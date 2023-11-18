@@ -36,13 +36,6 @@ namespace azki.Service
             return GetResultResponseDto.MapFromModel(instrument,
                 instrument.InstrumentOptions.First(i => i.Id == dto.InstrumentOptionId));
         }
-
-        public async Task<List<InstrumentOption>> GetInstrumentColors(long instrumentId)
-        {
-            var instrument = _repository.Get(instrumentId);
-
-            return instrument.InstrumentOptions.ToList();
-        }
     }
 
 }

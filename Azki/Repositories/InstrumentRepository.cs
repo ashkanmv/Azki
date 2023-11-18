@@ -1,7 +1,5 @@
 ﻿using azki.Model;
-using azki.Persistence;
 using Azki.Enum;
-using Microsoft.EntityFrameworkCore;
 
 namespace azki.Repositories
 {
@@ -16,7 +14,6 @@ namespace azki.Repositories
 
         public Instrument Get(long id)
         {
-            throw new Exception("ashdash");
             //return await AzkiContext.Instruments.Include(x => x.InstrumentOptions).FirstAsync(x => x.Id == id);
             return _instruments.First(x => x.Id == id);
         }
@@ -64,8 +61,9 @@ namespace azki.Repositories
                     {
                         Id = 1,
                         Title = "بیمه حوادث",
+                        Code = "BCKF2",
                         Discription = "اگه تو هم یه حامی نیاز داری برای حوادث ناگوار زندگی …",
-                        Code = "",
+                        Percent = 10
                     }
                 },
                 new Instrument
@@ -103,7 +101,8 @@ namespace azki.Repositories
                         Id = 2,
                         Title = "بیمه عمر",
                         Discription = "اگه می‌خوای بیمه عمرت بالشِ آرامشت باشه… ",
-                        Code = ""
+                        Code = "BCKF2",
+                        Percent = 10
                     }
                 },
                 new Instrument
@@ -141,7 +140,8 @@ namespace azki.Repositories
                         Id = 3,
                         Title = "بیمه مسافرتی",
                         Discription = "اگه دنبال یه سفر امن و بی‌خطری … ",
-                        Code = ""
+                        Code = "BCKF2",
+                        Percent = 10
                     }
                 },
                 new Instrument
@@ -152,7 +152,6 @@ namespace azki.Repositories
                     FinalPersonality = "کامل‌کننده و یاور",
                     Question = "پس پازل بودی، چه باحال! واسه همینه که همیشه می‌تونی گل سر سبد جمع باشی، به نظرت چه پازلی بودی؟",
                     Result = "هنوز مثل گذشته می‌تونی هر مساله‌ای رو حل کنی و مرکز هر جمع و بحثی باشی.",
-                    InsuranceType = InsuranceTypeEnum.Mobile,
                     SvgUrl = "https://s3.ir-thr-at1.arvanstorage.com/didar-0006df37-709c-4121-be9e-5210adc6a044/4b30c69e-c340-4403-83dc-42f8d7be20f2/puzzle.svg",
                     InstrumentOptions = new List<InstrumentOption>()
                     {
@@ -179,8 +178,9 @@ namespace azki.Repositories
                     {
                         Id = 4,
                         Title = "بیمه تکمیلی",
-                        Code = "",
-                        Discription = "اگر می‌خوای مثل همیشه برای خودت یا دیگران گام مثبت برداری، بیمه تکمیلی‌ات رو..."
+                        Code = "BCKF2",
+                        Discription = "اگر می‌خوای مثل همیشه برای خودت یا دیگران گام مثبت برداری، بیمه تکمیلی‌ات رو...",
+                        Percent = 10
                     }
                 },
                 new Instrument
@@ -217,8 +217,9 @@ namespace azki.Repositories
                     {
                         Id = 5,
                         Title = "بیمه شخص ثالث موتور",
-                        Code = "",
-                        Discription = "توی این زندگی‌ت هم حلقه‌ی نجات باش و نگرانی‌هات رو ..."
+                        Code = "BCKF1",
+                        Discription = "توی این زندگی‌ت هم حلقه‌ی نجات باش و نگرانی‌هات رو ...",
+                        Percent = 5
                     }
                 },
                 new Instrument
@@ -229,7 +230,6 @@ namespace azki.Repositories
                     FinalPersonality = "رمانتیک و مهربون",
                     Question = "پس دلیل این همه مهربونی و مراقبتت از آدما چتر بودنت تو زندگی قبلیه! فکر می‌کنی اگه چتر بودی چه رنگی بودی؟",
                     Result = "همین الانم مثل چتر حامی دوستات تو شرایط سختی و تو رگبار مشکلات به دادشون می‌رسی!",
-                    InsuranceType = InsuranceTypeEnum.ThirdPerson,
                     SvgUrl = "https://s3.ir-thr-at1.arvanstorage.com/didar-0006df37-709c-4121-be9e-5210adc6a044/4b30c69e-c340-4403-83dc-42f8d7be20f2/umbrella.svg",
                     InstrumentOptions = new List<InstrumentOption>()
                     {
@@ -256,8 +256,9 @@ namespace azki.Repositories
                     {
                         Id = 6,
                         Title = "بیمه درمان تکمیلی",
-                        Code = "",
-                        Discription = " اگه برای هزینه‌های درمانت یه چتر حامی مثل خودت می‌خوای…"
+                        Code = "BCKF2",
+                        Discription = " اگه برای هزینه‌های درمانت یه چتر حامی مثل خودت می‌خوای…",
+                        Percent = 10
                     }
                 },
                 new Instrument
@@ -294,8 +295,9 @@ namespace azki.Repositories
                     {
                         Id = 7,
                         Title = "بیمه بدنه",
-                        Code = "",
-                        Discription = "اگر می‌خوای ضرر حادثه رو کم کنی…"
+                        Code = "BCKF1",
+                        Discription = "اگر می‌خوای ضرر حادثه رو کم کنی…",
+                        Percent = 5
                     }
                 },
                 new Instrument
@@ -332,8 +334,9 @@ namespace azki.Repositories
                     {
                         Id = 8,
                         Title = "بیمه عمر",
-                        Code = "",
-                        Discription = "اگه می‌خوای بیمه عمرت عصای پیریت باشه…"
+                        Code = "BCKF2",
+                        Discription = "اگه می‌خوای بیمه عمرت عصای پیریت باشه…",
+                        Percent = 10
                     }
                 },
                 new Instrument
@@ -370,8 +373,9 @@ namespace azki.Repositories
                     {
                         Id = 9,
                         Title = "بیمه حوادث",
-                        Code = "",
-                        Discription = "اگه می‌خوای بیمه حوادث سپر جونت باشه…"
+                        Code = "BCKF2",
+                        Discription = "اگه می‌خوای بیمه حوادث سپر جونت باشه…",
+                        Percent = 10,
                     }
                 },
                 new Instrument
@@ -408,8 +412,9 @@ namespace azki.Repositories
                     {
                         Id = 10,
                         Title = "بیمه آتش‌سوزی",
-                        Code = "",
-                        Discription = "اگر می‌خوای خیالت از دمای خونه‌ت و جبران حوادث از آتش سوزی راحت باشه …"
+                        Code = "BCKF2",
+                        Discription = "اگر می‌خوای خیالت از دمای خونه‌ت و جبران حوادث از آتش سوزی راحت باشه …",
+                        Percent = 10,
                     }
                 },
                 new Instrument
@@ -446,8 +451,9 @@ namespace azki.Repositories
                     {
                         Id = 11,
                         Title = "بیمه مسافرتی",
-                        Code = "",
-                        Discription = "آتیش‌ها رو خاموش کن! نگران بیمه آتش سوزی نباش و…"
+                        Code = "BCKF2",
+                        Discription = "آتیش‌ها رو خاموش کن! نگران بیمه آتش سوزی نباش و…",
+                        Percent = 10
                     }
                 },
                 new Instrument
@@ -484,8 +490,9 @@ namespace azki.Repositories
                     {
                         Id = 12,
                         Title = "بیمه مسافرتی",
-                        Code = "",
-                        Discription = "مثل زندگی قبلیت هوس سفر کردی…"
+                        Code = "BCKF2",
+                        Discription = "مثل زندگی قبلیت هوس سفر کردی…",
+                        Percent = 10
                     }
                 },
                 new Instrument
@@ -522,8 +529,9 @@ namespace azki.Repositories
                     {
                         Id = 13,
                         Title = "بیمه مسافرتی",
-                        Code = "",
-                        Discription = "اگر مثل زندگی قبلیت هوس سفر کردی… "
+                        Code = "BCKF2",
+                        Discription = "اگر مثل زندگی قبلیت هوس سفر کردی… ",
+                        Percent = 10
                     }
                 },
                 new Instrument
@@ -560,8 +568,9 @@ namespace azki.Repositories
                     {
                         Id = 14,
                         Title = "بیمه آسانسور",
-                        Code = "",
-                        Discription = "اگه فکر می‌کنی آسانسور جایی که داخلش هستی نیاز به بیمه داره..."
+                        Code = "BCKF2",
+                        Discription = "اگه فکر می‌کنی آسانسور جایی که داخلش هستی نیاز به بیمه داره...",
+                        Percent = 10
                     }
                 },
                 new Instrument
@@ -598,8 +607,9 @@ namespace azki.Repositories
                     {
                         Id = 15,
                         Title = "بیمه شخص ثالث موتور",
-                        Code = "",
-                        Discription = "اگر می‌خوای جلوی خسارت رو بگیری، نگران نباش…"
+                        Code = "BCKF1",
+                        Discription = "اگر می‌خوای جلوی خسارت رو بگیری، نگران نباش…",
+                        Percent = 5
                     }
                 },
             };
