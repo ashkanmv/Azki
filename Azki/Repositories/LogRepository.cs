@@ -8,11 +8,12 @@
             {
                 var errorLog = Environment.NewLine + "UTC Occurrence Date => " + DateTime.UtcNow + " Error Message => " + message;
                 await File.AppendAllTextAsync(Directory.GetCurrentDirectory() + "/ExceptionLogs.txt", errorLog);
-
+                Console.WriteLine(errorLog);
                 return true;
             }
-            catch
+            catch(Exception e)
             {
+                Console.WriteLine(e.Message);
                 return false;
             }
         }
