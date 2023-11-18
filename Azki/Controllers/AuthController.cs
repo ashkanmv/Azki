@@ -47,7 +47,7 @@ namespace Azki.Controllers
             {
                 if (dto == null || string.IsNullOrEmpty(dto.phoneNumber) || string.IsNullOrEmpty(dto.verifyCode))
                     return BadRequest("Invalid Credentials");
-
+                dto.corporationUser = false;
                 var response = await _authService.Verify(dto);
 
                 return Ok(response);

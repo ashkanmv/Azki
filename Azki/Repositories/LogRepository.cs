@@ -1,7 +1,4 @@
-﻿using Azure;
-using System.Net.Mail;
-
-namespace Azki.Repositories
+﻿namespace Azki.Repositories
 {
     public class LogRepository
     {

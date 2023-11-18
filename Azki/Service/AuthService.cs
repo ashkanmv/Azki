@@ -13,7 +13,7 @@ public class AuthService : IAuthService
         baseUrl = configuration.GetSection("AzkiBaseUrl").Value;
     }
 
-    public async Task<bool> Authenticate(AuthenticateUserRequestDto dto)
+    public async Task<string> Authenticate(AuthenticateUserRequestDto dto)
     {
         var client = new HttpClient();
         var request = new HttpRequestMessage(HttpMethod.Post, baseUrl + "/v2/api/customer/auth");
@@ -21,9 +21,13 @@ public class AuthService : IAuthService
 
         var response = await client.SendAsync(request);
 
-        var result = JsonSerializer.Deserialize<AzkiResponseDto<long?>>(await response.Content.ReadAsStringAsync());
+        var result = JsonSerializer.Deserialize<AzkiResponseDto<string>>(await response.Content.ReadAsStringAsync());
 
-        return result is {messageCode: 200};
+
+        if (result is not { messageCode: 200 })
+            throw new Exception(result?.message);
+
+        return result.result;
     }
 
     public async Task<VerifyResponseDto> Verify(AzkiVerifyRequestDto dto)

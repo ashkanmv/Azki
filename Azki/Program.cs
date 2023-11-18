@@ -1,19 +1,13 @@
-using azki.Data;
-using azki.Persistence;
 using azki.Repositories;
-using Azki.Repositories;
 using azki.Service;
+using Azki.Repositories;
 using Azki.Service;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-
-//builder.Services.AddDbContext<AzkiContext>(options =>
-//    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -27,11 +21,6 @@ builder.Services.AddScoped<IInstrumentService, InstrumentService>();
 builder.Services.AddScoped<IInstrumentRepository, InstrumentRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<LogRepository>();
-
-//var context = builder.Services.BuildServiceProvider().GetRequiredService<AzkiContext>();
-//await context.Database.MigrateAsync();
-//if (context.Instruments.Any() == false)
-//    await DataSeed.SeedAsync(context);
 
 var app = builder.Build();
 
